@@ -1,65 +1,66 @@
-# 🤖✨ Agentes de IA Notícias & Eventos - Mantenha-se à Frente na Revolução da IA! ✨🤖
+# Gerador de Agenda de Discussão de IA para Empresas
 
-[![Imagem de um cérebro feito de circuitos, representando a IA](LINK_PARA_SUA_IMAGEM_CEREBRO_IA.png)](LINK_PARA_O_SEU_REPOSITORIO)
+Este Google Colab é uma ferramenta automatizada para auxiliar empresas a se manterem atualizadas sobre os avanços em Inteligência Artificial (IA) e a planejar discussões estratégicas internas. Ele busca os principais tópicos de IA (inovação, ferramentas, notícias), identifica eventos relevantes no Brasil e propõe uma agenda de discussão personalizada com base no segmento da empresa e nos projetos em andamento/backlog.
 
-## 📰 Bem-vindo ao Futuro da Informação em IA! 🚀
+## Funcionalidades
 
-Cansado de perder as últimas novidades e eventos imperdíveis no universo da Inteligência Artificial? Se a resposta é um sonoro "SIM!", então você está no lugar certo! Este repositório abriga o código dos nossos **Agentes de IA Notícias & Eventos**, criados com a missão de te manter **semanalmente atualizado** com o que há de mais quente em IA e inovação, além de te conectar com as melhores oportunidades de aprendizado e networking.
+* **Seleção de Segmento da Empresa:** Escolha o segmento da sua empresa através de um dropdown para personalizar a relevância do conteúdo de IA.
+* **Integração com Gemini API:** Utiliza a API do Google Gemini para:
+    * Gerar consultas de busca inteligentes.
+    * Analisar e resumir o conteúdo de notícias e artigos.
+    * Selecionar os **dois principais** exemplos de inovação, ferramentas e notícias relevantes em IA a cada mês, considerando o segmento da empresa.
+* **Busca Automatizada de Eventos:** Encontra eventos de IA (online ou presenciais, gratuitos) no Brasil para o mês seguinte, usando a busca no Google.
+* **Análise de Projetos (Opcional):** Conecte uma planilha de projetos (CSV ou XLSX) com status "Em Andamento" e "Backlog" para que a agenda sugira sinergias com as tendências de IA.
+* **Geração de Agenda Personalizada:** Propõe uma agenda de discussão detalhada, com tópicos baseados nas informações levantadas e na relevância para o negócio.
+* **Notificações Integradas:**
+    * **E-mail:** Envie a agenda gerada para múltiplos endereços de e-mail via SMTP (requer configuração de senha de aplicativo Gmail).
+    * **WhatsApp (via Evolution API):** Envie a agenda via WhatsApp para números específicos (requer uma instância da Evolution API configurada).
 
-Imagine ter um assistente inteligente vasculhando a vasta internet para trazer até você:
+## Como Usar
 
-* **Resumos concisos e perspicazes** dos avanços mais recentes em IA.
-* **Insights sobre as tecnologias disruptivas** que estão moldando o nosso futuro.
-* **A curadoria dos workshops, cursos e feiras de IA** que realmente importam.
+1.  **Abra no Google Colab:** Clique no botão "Open in Colab" (se estiver visualizando no GitHub) ou copie o conteúdo do `notebook.ipynb` para um novo Colab.
+2.  **Configurar a API do Gemini:**
+    * Obtenha sua chave de API do Google Gemini em [Google AI Studio](https://aistudio.google.com/app/apikey).
+    * No Google Colab, clique no ícone "Secrets" (uma chave) no painel esquerdo.
+    * Adicione uma nova variável secreta chamada `GOOGLE_API_KEY` e cole sua chave de API como valor.
+    * **Nunca exponha sua chave diretamente no código ou no GitHub!**
+3.  **Instalar Dependências:** Execute a primeira célula do Colab para instalar todas as bibliotecas necessárias.
+4.  **Selecione o Segmento:** Escolha o segmento da sua empresa no dropdown.
+5.  **Carregar Planilha de Projetos (Opcional):**
+    * Clique em "Conectar com Planilha de Projetos" e faça o upload de um arquivo CSV ou XLSX.
+    * A planilha deve conter as colunas `Projeto` e `Status` (com valores como "Em Andamento" ou "Backlog").
+    * Alternativamente, clique em "IGNORAR" se não desejar usar uma planilha.
+6.  **Gerar Agenda:** Clique no botão "Gerar Agenda de Discussão". O Colab fará as buscas e apresentará a agenda.
+7.  **Enviar Notificações (Opcional):**
+    * **E-mail:** Preencha os campos de e-mail de destino, seu e-mail Gmail e a senha de aplicativo (veja abaixo como gerar). Clique em "Enviar Agenda por E-mail".
+        * **Para Gmail:** Você precisará ativar a verificação em duas etapas na sua conta Google e gerar uma "senha de aplicativo" para usar aqui, em vez da sua senha normal. Pesquise por "gerar senha de aplicativo Gmail".
+    * **WhatsApp (Evolution API):** Preencha o URL da sua instância da Evolution API, sua API Key e os números de WhatsApp (formato `55DDNNNNNNNNN`). Clique em "Enviar Agenda por WhatsApp".
+        * **Atenção:** Você precisa ter uma instância da Evolution API configurada e rodando para esta funcionalidade. Verifique a documentação da Evolution API para detalhes sobre a instância e a chave de API.
 
-Tudo isso entregue diretamente para você, pronto para ser explorado!
+## Estrutura do Código
 
-## 🛠️ O Que Você Encontrará Aqui?
+O notebook é dividido em células lógicas:
 
-Dentro deste espaço mágico, você descobrirá o código-fonte dos nossos poderosos agentes de IA, incluindo:
+* **Configuração Inicial:** Instalação de bibliotecas e configuração da API do Gemini.
+* **Variáveis Globais:** Definição de variáveis que persistem dados entre as células.
+* **Segmento da Empresa:** Widget de dropdown para seleção do segmento.
+* **Conexão com Planilha de Projetos:** Widgets para upload de arquivo e processamento.
+* **Coleta de Dados de IA:** Função `coletar_dados_ia_com_gemini` que interage com a API do Gemini e simula a busca no Google.
+* **Busca de Eventos:** Função `coletar_eventos_ia_google` que simula a busca por eventos no Google.
+* **Geração da Agenda:** Função `gerar_agenda` que compila as informações e personaliza o output.
+* **Botão Gerar Agenda:** Dispara o processo principal.
+* **Envio por E-mail:** Widgets e função `send_email_notification` para o envio via SMTP.
+* **Envio por WhatsApp:** Widgets e função `send_whatsapp_message` para a integração com a Evolution API.
 
-* **Agente de Notícias de IA:** Responsável por coletar, analisar e sintetizar as últimas notícias e tendências do mundo da Inteligência Artificial. (Você pode até encontrar um pedacinho dele brilhando [aqui](LINK_PARA_O_SEU_NOTEBOOK_COLAB) 😉).
-* **Agente de Eventos de IA:** Dedicado a rastrear e organizar informações sobre workshops, cursos online e presenciais, além das feiras e conferências mais relevantes do setor.
-* **Módulos de Integração:** O código que permite a conexão com ferramentas externas (pense em agendas, calendários, plataformas de e-mail marketing - as possibilidades são infinitas!).
+## Contribuições
 
-[![Imagem de engrenagens se encaixando, representando a integração](LINK_PARA_SUA_IMAGEM_INTEGRACAO.png)](LINK_PARA_O_SEU_REPOSITORIO)
+Sinta-se à vontade para contribuir com melhorias, como:
 
-## ⚙️ Como Tudo Isso Funciona? (Um Mergulho Rápido na Inteligência por Trás da Cortina)
-
-Nossos agentes são construídos utilizando técnicas de Processamento de Linguagem Natural (PLN) e aprendizado de máquina para:
-
-1.  **Coletar Dados:** Navegam por diversas fontes de informação relevantes (sites de notícias, artigos científicos, plataformas de eventos, etc.).
-2.  **Analisar e Filtrar:** Utilizam modelos de IA para identificar informações chave, remover ruídos e priorizar o que é realmente importante para você.
-3.  **Sintetizar e Formatar:** Transformam dados brutos em resumos claros, concisos e fáceis de entender para os e-mails semanais.
-4.  **Conectar e Organizar:** Extraem detalhes cruciais sobre eventos (datas, horários, locais, temas) e os preparam para serem integrados com outras ferramentas.
-
-## 🚀 Próximos Passos e Contribuições
-
-Este projeto está em constante evolução, e adoraríamos ter você a bordo! Aqui estão algumas áreas onde você pode contribuir:
-
-* **Melhoria dos Agentes:** Otimizar os algoritmos de coleta e análise para torná-los ainda mais eficientes e precisos.
-* **Novas Integrações:** Desenvolver módulos para conectar nossos agentes com mais ferramentas e plataformas.
-* **Sugestões e Ideias:** Compartilhe suas ideias e sugestões para tornar este projeto ainda mais útil para a comunidade de IA.
-* **Reporte de Bugs:** Se encontrar algum comportamento inesperado, por favor, nos avise!
-
-[![Imagem de pessoas trabalhando juntas em um projeto de tecnologia](LINK_PARA_SUA_IMAGEM_COLABORACAO.png)](LINK_PARA_O_SEU_REPOSITORIO)
-
-## 🤝 Junte-se à Nossa Comunidade!
-
-Queremos construir uma comunidade engajada em torno deste projeto. Sinta-se à vontade para:
-
-* Abrir **Issues** para reportar bugs, sugerir melhorias ou discutir novas funcionalidades.
-* Enviar **Pull Requests** com suas contribuições de código.
-* Compartilhar este repositório com seus amigos e colegas interessados em IA!
-
-## 📄 Licença
-
-Este projeto está sob a licença [INSERIR A LICENÇA DO SEU PROJETO AQUI - Ex: MIT License]. Consulte o arquivo `LICENSE` para obter mais detalhes.
-
-## 🙏 Agradecimentos
-
-Gostaríamos de agradecer a todos os recursos, bibliotecas e à comunidade de IA que tornaram este projeto possível. Seu conhecimento e apoio são inestimáveis!
+* Adicionar mais fontes de dados para IA (web scraping de blogs específicos, outras APIs de notícias).
+* Melhorar a lógica de filtragem e seleção dos "top 2" itens.
+* Refinar a extração de detalhes de eventos.
+* Adicionar suporte a outras APIs de comunicação.
 
 ---
-
-**Mantenha-se curioso. Mantenha-se informado. Mantenha-se à frente com os Agentes de IA Notícias & Eventos!** 🤖✨
+**Desenvolvido por:** [Seu Nome/GitHub User]
+**Licença:** MIT (Opcional, se você quiser adicionar uma licença)
