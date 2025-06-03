@@ -19,7 +19,7 @@ Este Google Colab é uma ferramenta automatizada para auxiliar empresas a se man
 
 ## Como Usar
 
-1.  **Abra no Google Colab:** Clique no botão "Open in Colab" (se estiver visualizando no GitHub) ou copie o conteúdo do `notebook.ipynb` para um novo Colab.
+1.  **Abra no Google Colab:** Clique no botão "Open in Colab" (se estiver visualizando no GitHub) ou copie o conteúdo do `Projeto_Imersão.ipynb` para um novo Colab.
 2.  **Configurar a API do Gemini:**
     * Obtenha sua chave de API do Google Gemini em [Google AI Studio](https://aistudio.google.com/app/apikey).
     * No Google Colab, clique no ícone "Secrets" (uma chave) no painel esquerdo.
